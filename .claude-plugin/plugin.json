@@ -1,0 +1,20 @@
+{
+  "name": "unity-kit",
+  "displayName": "Unity for Claude Code",
+  "version": "1.0.0",
+  "description": "Reads the Unity project's real configuration into the session, refuses the edits that break serialized assets, and reviews every C# file it writes for the Unity-specific costs a general C# reading misses.",
+  "author": {
+    "name": "Alihan Azgur",
+    "url": "https://github.com/Alhnzgrr"
+  },
+  "homepage": "https://github.com/Alhnzgrr/unity-claude-kit",
+  "repository": "https://github.com/Alhnzgrr/unity-claude-kit",
+  "license": "MIT",
+  "keywords": [
+    "unity",
+    "game-development",
+    "csharp",
+    "hooks",
+    "code-review"
+  ]
+}

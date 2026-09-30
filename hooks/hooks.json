@@ -1,0 +1,71 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/scripts/session-context.js"],
+            "timeout": 15,
+            "statusMessage": "Reading the Unity project"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/scripts/guard-serialized-assets.js"],
+            "timeout": 15,
+            "statusMessage": "Checking the file against Unity's serialized assets"
+          },
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/scripts/guard-runtime-code.js"],
+            "timeout": 15,
+            "statusMessage": "Checking editor and input boundaries"
+          },
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/scripts/guard-serialized-rename.js"],
+            "timeout": 15,
+            "statusMessage": "Checking serialized field names"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/scripts/guard-asset-deletion.js"],
+            "timeout": 15,
+            "statusMessage": "Checking asset and .meta pairing"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/scripts/review-csharp.js"],
+            "timeout": 20,
+            "statusMessage": "Reviewing the C# just written"
+          }
+        ]
+      }
+    ]
+  }
+}

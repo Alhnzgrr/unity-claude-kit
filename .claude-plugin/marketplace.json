@@ -1,0 +1,21 @@
+{
+  "name": "unity-claude-kit",
+  "description": "A Claude Code plugin for Unity development: project-aware hooks, Unity skills, and review subagents.",
+  "owner": {
+    "name": "Alihan Azgur",
+    "url": "https://github.com/Alhnzgrr"
+  },
+  "plugins": [
+    {
+      "name": "unity-kit",
+      "source": ".",
+      "category": "game-development",
+      "tags": [
+        "unity",
+        "csharp",
+        "game-development",
+        "code-review"
+      ]
+    }
+  ]
+}
