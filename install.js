@@ -98,12 +98,29 @@ for (const folder of ["hooks", "rules", "skills", "agents"]) placeTree(folder);
 
 // --- project instructions --------------------------------------------------
 
-const wroteClaudeMd = place("CLAUDE.md", (destination) =>
-  fs.copyFileSync(path.join(TEMPLATE, "CLAUDE.md"), destination)
-);
+// CLAUDE.md is the one file whose whole purpose is to be edited after the
+// install — the stack, the folder layout, the project's own rules. So it is
+// written once and never replaced, even though the manifest lists it. A
+// re-run that silently reverts those edits is worse than no update at all,
+// and this installer did exactly that once before the rule was added.
+const claudeMdPath = path.join(claude, "CLAUDE.md");
+const claudeMdExisted = fs.existsSync(claudeMdPath);
 
-if (wroteClaudeMd) {
+if (!claudeMdExisted) {
+  if (!dryRun) {
+    fs.mkdirSync(claude, { recursive: true });
+    fs.copyFileSync(path.join(TEMPLATE, "CLAUDE.md"), claudeMdPath);
+  }
+  added.push("CLAUDE.md");
+  installed.push("CLAUDE.md");
   notes.push("Open .claude/CLAUDE.md and fill in the bracketed lines at the top.");
+} else if (owned.has("CLAUDE.md")) {
+  kept.push("CLAUDE.md");
+  installed.push("CLAUDE.md");
+  notes.push(
+    "Your .claude/CLAUDE.md was left exactly as you edited it. The current\n" +
+      "template is at template/CLAUDE.md in this repository if you want to diff it."
+  );
 } else {
   place("CLAUDE.unity-kit.md", (destination) =>
     fs.copyFileSync(path.join(TEMPLATE, "CLAUDE.md"), destination)
@@ -187,7 +204,7 @@ section("added", added);
 section("updated", updated);
 section("kept — yours, not overwritten", kept);
 
-if (kept.length) {
+if (kept.some((f) => f !== "CLAUDE.md" || !owned.has("CLAUDE.md"))) {
   notes.push(
     "The files under 'kept' already existed and were not written by this kit, so\n" +
       "they were left as they are. Compare them against template/ if you want ours."

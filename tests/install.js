@@ -104,6 +104,8 @@ check("hook args use CLAUDE_PROJECT_DIR", argPath.startsWith("${CLAUDE_PROJECT_D
 
 // --- second install -------------------------------------------------------
 console.log("\nsecond install (idempotency)");
+// Edit CLAUDE.md the way a user would, before re-running.
+fs.appendFileSync(path.join(project, ".claude/CLAUDE.md"), "\n- MY PROJECT NOTE\n");
 const second = install();
 check("exits 0", second.status, 0);
 check("still 2 kit matcher groups, not 4", kitEntries().length, 2);
@@ -112,7 +114,12 @@ check("still preserves the project's Bash hook",
 check("still preserves env", settings().env.MY_VAR, "keep me");
 check("still keeps the project's own agent",
   fs.readFileSync(path.join(project, ".claude/agents/code-reviewer.md"), "utf8").trim().endsWith("mine"), true);
-check("reports CLAUDE.md as updated, not kept", second.stdout.includes("kept — yours") ? second.stdout.includes("CLAUDE.md\n") : true, true);
+// The regression this file exists for: a second install must not revert an
+// edited CLAUDE.md. It did, once.
+check("does not revert an edited CLAUDE.md",
+  fs.readFileSync(path.join(project, ".claude/CLAUDE.md"), "utf8").includes("MY PROJECT NOTE"), true);
+check("does not write CLAUDE.unity-kit.md beside its own file",
+  fs.existsSync(path.join(project, ".claude/CLAUDE.unity-kit.md")), false);
 
 // --- refuses a non-Unity directory ---------------------------------------
 console.log("\nguards");

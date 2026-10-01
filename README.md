@@ -176,8 +176,8 @@ wrote the code is the worst available judge of it.
 Hooks that have never been seen to fire are decoration.
 
 ```bash
-node tests/run.js        # 98 assertions — the hooks
-node tests/install.js    # 31 assertions — the install
+node tests/run.js        # 99 assertions — the hooks
+node tests/install.js    # 32 assertions — the install
 ```
 
 The hook suite runs each hook as a child process with a real payload on stdin,
@@ -212,6 +212,9 @@ projects rather than from writing tests:
   overwrite a hand-written `code-reviewer` agent. That is why the installer
   keeps a manifest: "replaces the files it owns" has to mean something
   checkable.
+- Installing twice into a project reverted an edited `CLAUDE.md` back to the
+  template. `CLAUDE.md` is now written once and never replaced, and the second
+  install asserts it.
 
 **Not verified here:** the hooks firing inside a live Claude Code session. They
 are verified by direct execution, the installed layout is verified end to end,

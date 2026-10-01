@@ -163,6 +163,8 @@ console.log("\nguard-serialized-assets");
   const sceneReason = reasonOf(runHook(g, preWrite(modern, at("Assets/Scenes/Main.unity"), "x")));
   contains("scene refusal points at the handoff skill", sceneReason, "editor-handoff");
   contains("meta refusal explains the GUID", reasonOf(runHook(g, preWrite(modern, at("Assets/A.png.meta"), "x"))), "GUID");
+  contains("the refusal quotes the file name as spelled",
+    reasonOf(runHook(g, preWrite(modern, at("Assets/Prefabs/EnemySpawner.prefab"), "x"))), "EnemySpawner.prefab");
 }
 
 // --- guard-runtime-code: editor in runtime --------------------------------

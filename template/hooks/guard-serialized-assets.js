@@ -31,8 +31,11 @@ io.run((payload) => {
 
   const normalized = io.normalize(file);
   const lower = normalized.toLowerCase();
-  const base = lower.split("/").pop();
-  const ext = base.includes(".") ? base.slice(base.lastIndexOf(".")) : "";
+  // Matching is case-insensitive; the message quotes the name as the user
+  // spells it, because a refusal naming "enemy.prefab" for Enemy.prefab reads
+  // like the hook is talking about some other file.
+  const base = normalized.split("/").pop();
+  const ext = base.includes(".") ? base.slice(base.lastIndexOf(".")).toLowerCase() : "";
 
   const root = unity.findProjectRoot(io.path.dirname(file)) || unity.findProjectRoot(payload.cwd);
   if (!root) return null;
