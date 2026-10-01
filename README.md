@@ -48,6 +48,10 @@ always on, install into the project.
 
 </details>
 
+> **Pick one form per project.** If a project has `.claude/hooks/` and the
+> plugin is also enabled, every guard runs twice and the session context is
+> injected twice. Install into the project, or install the plugin — not both.
+
 ---
 
 ## It reads the project instead of guessing
