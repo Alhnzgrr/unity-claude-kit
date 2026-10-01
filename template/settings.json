@@ -6,7 +6,9 @@
           {
             "type": "command",
             "command": "node",
-            "args": ["${CLAUDE_PLUGIN_ROOT}/template/hooks/session-context.js"],
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/session-context.js"
+            ],
             "timeout": 15,
             "statusMessage": "Reading the Unity project"
           }
@@ -20,21 +22,27 @@
           {
             "type": "command",
             "command": "node",
-            "args": ["${CLAUDE_PLUGIN_ROOT}/template/hooks/guard-serialized-assets.js"],
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/guard-serialized-assets.js"
+            ],
             "timeout": 15,
             "statusMessage": "Checking the file against Unity's serialized assets"
           },
           {
             "type": "command",
             "command": "node",
-            "args": ["${CLAUDE_PLUGIN_ROOT}/template/hooks/guard-runtime-code.js"],
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/guard-runtime-code.js"
+            ],
             "timeout": 15,
             "statusMessage": "Checking editor and input boundaries"
           },
           {
             "type": "command",
             "command": "node",
-            "args": ["${CLAUDE_PLUGIN_ROOT}/template/hooks/guard-serialized-rename.js"],
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/guard-serialized-rename.js"
+            ],
             "timeout": 15,
             "statusMessage": "Checking serialized field names"
           }
@@ -46,7 +54,9 @@
           {
             "type": "command",
             "command": "node",
-            "args": ["${CLAUDE_PLUGIN_ROOT}/template/hooks/guard-asset-deletion.js"],
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/guard-asset-deletion.js"
+            ],
             "timeout": 15,
             "statusMessage": "Checking asset and .meta pairing"
           }
@@ -60,7 +70,9 @@
           {
             "type": "command",
             "command": "node",
-            "args": ["${CLAUDE_PLUGIN_ROOT}/template/hooks/review-csharp.js"],
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/review-csharp.js"
+            ],
             "timeout": 20,
             "statusMessage": "Reviewing the C# just written"
           }

@@ -16,5 +16,13 @@
     "csharp",
     "hooks",
     "code-review"
+  ],
+  "skills": [
+    "./template/skills/"
+  ],
+  "agents": [
+    "./template/agents/code-reviewer.md",
+    "./template/agents/performance-auditor.md",
+    "./template/agents/architect.md"
   ]
 }

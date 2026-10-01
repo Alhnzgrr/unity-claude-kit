@@ -41,7 +41,7 @@ io.run((payload) => {
   lines.push(
     "- Scenes, prefabs and other serialized assets are edited in the Unity Editor, " +
       "by a person. Hooks in this plugin refuse text edits to them. When a change " +
-      "needs Editor work, use the `/unity-kit:editor-handoff` skill to write the checklist " +
+      "needs Editor work, use the `editor-handoff` skill to write the checklist " +
       "instead of attempting the edit."
   );
   lines.push(

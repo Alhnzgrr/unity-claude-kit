@@ -15,7 +15,7 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 
-const SCRIPTS = path.join(__dirname, "..", "scripts");
+const SCRIPTS = path.join(__dirname, "..", "template", "hooks");
 const root = fs.mkdtempSync(path.join(os.tmpdir(), "unity-kit-tests-"));
 
 // --- fixture projects ------------------------------------------------------
@@ -161,7 +161,7 @@ console.log("\nguard-serialized-assets");
   check("asks about packages-lock.json", decisionOf(runHook(g, preWrite(modern, at("Packages/packages-lock.json"), "{}"))), "ask");
 
   const sceneReason = reasonOf(runHook(g, preWrite(modern, at("Assets/Scenes/Main.unity"), "x")));
-  contains("scene refusal points at the handoff skill", sceneReason, "/unity-kit:editor-handoff");
+  contains("scene refusal points at the handoff skill", sceneReason, "editor-handoff");
   contains("meta refusal explains the GUID", reasonOf(runHook(g, preWrite(modern, at("Assets/A.png.meta"), "x"))), "GUID");
 }
 
@@ -427,7 +427,7 @@ console.log("\nsession-context");
   contains("reports the input backend", report, "Input System only");
   contains("reports notable packages", report, "Entities (DOTS) 1.3.5");
   contains("reports the missing assembly definitions", report, "Assembly-CSharp");
-  contains("states the serialized-asset agreement", report, "/unity-kit:editor-handoff");
+  contains("states the serialized-asset agreement", report, "editor-handoff");
   contains("warns that legacy Input throws here", report, "throws at runtime");
   contains("flags the Unity 6 obsolete APIs", report, "FindFirstObjectByType");
 

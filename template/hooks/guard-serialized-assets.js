@@ -22,7 +22,7 @@ const unity = require("./lib/unity-project.js");
 
 const HANDOFF =
   "Do not work around this by editing the file another way. Use the " +
-  "`/unity-kit:editor-handoff` skill to write the exact Editor steps for the user " +
+  "`editor-handoff` skill to write the exact Editor steps for the user " +
   "instead, and continue with the C# side of the task.";
 
 io.run((payload) => {

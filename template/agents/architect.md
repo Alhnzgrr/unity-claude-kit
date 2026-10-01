@@ -46,7 +46,7 @@ the event. Where the frame boundaries are, and whether anything crosses one.
 **4. The Editor work.** Every scene object, prefab, asset and project setting a
 person has to create or change. This is not an afterthought: hooks in this plugin
 refuse text edits to serialized files, so if the plan needs Editor work it needs
-to be written down. Hand this section to the `/unity-kit:editor-handoff` skill to
+to be written down. Hand this section to the `editor-handoff` skill to
 turn into a checklist.
 
 **5. What you decided against.** Two or three alternatives with the reason each
