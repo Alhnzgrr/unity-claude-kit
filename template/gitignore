@@ -1,0 +1,5 @@
+# Written by the installer when it merges an existing settings.json.
+settings.json.bak
+
+# Personal, per-machine overrides. Not shared with the team.
+settings.local.json

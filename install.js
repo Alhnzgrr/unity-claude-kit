@@ -132,6 +132,13 @@ if (!claudeMdExisted) {
   );
 }
 
+// --- .gitignore for the two files that are per-machine ---------------------
+// Shipped as template/gitignore because a literal .gitignore inside template/
+// would hide the template from git in this repository.
+place(".gitignore", (destination) =>
+  fs.copyFileSync(path.join(TEMPLATE, "gitignore"), destination)
+);
+
 // --- settings: merged, never replaced --------------------------------------
 
 const settingsPath = path.join(claude, "settings.json");
